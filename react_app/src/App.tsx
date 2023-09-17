@@ -10,19 +10,16 @@ function App() {
     })
     .catch((error) => {
       console.error('Error:', error);
-      console.log('Hello')
     });
   })
   
   return (
     <div className="App">
-        (
           <div className="card">
         <button onClick={() => logIn()}>
           LogIn with Keycloack
         </button>
       </div>
-        )
     </div>
     )
   }

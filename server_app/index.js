@@ -9,17 +9,13 @@ var session = "";
 
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.status(200).send("Hello, World!");
-});
-
 app.get("/auth", (req, res) => {
     session = generateRandomState();
 
     const options = {
       client_id: "test_client1234",
       scope: "openid",
-      redirect_uri: "http://127.0.0.1:3000/code",
+      redirect_uri: "http://127.0.0.1:3000/state",
       state: session,
       nonce: "0394852-3190485-2490358",
     };
@@ -29,7 +25,7 @@ app.get("/auth", (req, res) => {
     res.status(200).send(authentication_URI);
 });
 
-app.get("/code", (req, res) => {
+app.get("/state", (req, res) => {
   const receivedState = req.query.state;
   console.log('Memory:' + session + '==' + 'Recieved:' + req.query.state);
   if (receivedState === session) {
@@ -48,5 +44,5 @@ app.listen(port, () => {
 });
 
 function generateRandomState() {
-  return random.generate(30);;
+  return random.generate(30);
 }
